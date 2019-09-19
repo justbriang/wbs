@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "546057166075",
+    "firebase_url": "https://waba-255c4.firebaseio.com",
+    "project_id": "waba-255c4",
+    "storage_bucket": "waba-255c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:546057166075:android:e4d118178306cff7eb245e",
+        "android_client_info": {
+          "package_name": "com.example.waba"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "546057166075-a9p947k8fka02b0i4292ic5dh1cor4ut.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.waba",
+            "certificate_hash": "1380ebc7a5717b3623519fb1c8424dc2d2d8844d"
+          }
+        },
+        {
+          "client_id": "546057166075-tr4nteukimg2ugm8hma5jb2040ab65vc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNZtkI5bNpXzuK4jVHxg_pIq3Ss65ee4E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546057166075-tr4nteukimg2ugm8hma5jb2040ab65vc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

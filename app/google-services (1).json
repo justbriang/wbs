@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "526172271818",
+    "firebase_url": "https://waba254-2bfe1.firebaseio.com",
+    "project_id": "waba254-2bfe1",
+    "storage_bucket": "waba254-2bfe1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:526172271818:android:b46b04c7a399b2f9933033",
+        "android_client_info": {
+          "package_name": "com.example.waba"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "526172271818-4lfg3ht5a69ifev3lb0cpum2gnaj25rd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQqbL5i2p4oYao0cTE5birTT8P1ew2cR4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "526172271818-4lfg3ht5a69ifev3lb0cpum2gnaj25rd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
