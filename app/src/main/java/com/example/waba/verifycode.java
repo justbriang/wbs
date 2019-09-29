@@ -62,14 +62,15 @@ public class verifycode extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String code = editTextCode.getText().toString().trim();
-                if (code.isEmpty() || code.length() < 6) {
+                /*if (code.isEmpty() || code.length() < 6) {
                     editTextCode.setError("Enter valid code");
                     editTextCode.requestFocus();
                     return;
-                }
-
+                }*/
+                Intent intent = new Intent(verifycode.this, slidemenu.class);
+                startActivity(intent);
                 //verifying the code entered manually
-                verifyVerificationCode(code);
+                //verifyVerificationCode(code);
             }
         });
 
@@ -135,13 +136,13 @@ public class verifycode extends AppCompatActivity {
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-        mAuth.signInWithCredential(credential)
+        /*mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(verifycode.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             //verification successful we will start the profile activity
-                            Intent intent = new Intent(verifycode.this, home.class);
+                            Intent intent = new Intent(verifycode.this, slidemenu.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
 
@@ -164,7 +165,10 @@ public class verifycode extends AppCompatActivity {
                             snackbar.show();
                         }
                     }
-                });
+
+                });*/
+
+
     }
 
 }

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "546057166075-fp77n6g3gqu860fjptqjmqterikls9a4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.waba",
+            "certificate_hash": "17cec7c140702a6348b05a8867d2a19015ccc5ab"
+          }
+        },
+        {
           "client_id": "546057166075-a9p947k8fka02b0i4292ic5dh1cor4ut.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
