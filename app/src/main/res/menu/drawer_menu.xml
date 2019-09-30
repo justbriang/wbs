@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+   tools:showIn="navigation_view">
+    <group android:checkableBehavior ="single">
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/ic_person"
+            android:title="Profile" />
+        <item
+            android:id="@+id/location"
+            android:icon="@drawable/ic_add_location"
+            android:title="Add Location" />
+        <item
+            android:id="@+id/call"
+            android:icon="@drawable/ic_call_black_24dp"
+            android:title="Contact driver" />
+        <item
+            android:id="@+id/support"
+            android:icon="@drawable/ic_help"
+            android:title="Help" />
+
+    </group>
+    <item android:title="Contact Us">
+        <menu>
+
+            <item
+                android:id="@+id/report"
+                android:icon="@drawable/ic_report_problem"
+                android:title="Report Problem" />
+            <item
+                android:id="@+id/about"
+                android:icon="@drawable/ic_info"
+                android:title="About us " />
+
+
+        </menu>
+    </item>
+
+</menu>
