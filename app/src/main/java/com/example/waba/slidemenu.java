@@ -19,13 +19,14 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class slidemenu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
-    Button logout;
+    Button logout1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_slidemenu);
         androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+
 
         setSupportActionBar(toolbar);
         drawer=findViewById(R.id.drawer_layout);
@@ -34,16 +35,14 @@ public class slidemenu extends AppCompatActivity implements NavigationView.OnNav
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-        logout=findViewById(R.id.logout);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(slidemenu.this, MainActivity.class);
 
-                startActivity(intent);
-            }
-        });
+
+
+        if(savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Location()).commit();
+            navigationView.setCheckedItem(R.id.location);
+
+        }
 
     }
 
@@ -69,6 +68,7 @@ public class slidemenu extends AppCompatActivity implements NavigationView.OnNav
              break;
          case R.id.about:
              Toast.makeText(this,"about_us",Toast.LENGTH_SHORT);
+             break;
      }
         return true;
     }

@@ -4,13 +4,14 @@
    tools:showIn="navigation_view">
     <group android:checkableBehavior ="single">
         <item
+            android:id="@+id/location"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
+        <item
             android:id="@+id/profile"
             android:icon="@drawable/ic_person"
             android:title="Profile" />
-        <item
-            android:id="@+id/location"
-            android:icon="@drawable/ic_add_location"
-            android:title="Add Location" />
+
         <item
             android:id="@+id/call"
             android:icon="@drawable/ic_call_black_24dp"

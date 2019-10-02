@@ -21,7 +21,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class verifycode extends AppCompatActivity {
@@ -35,6 +39,8 @@ public class verifycode extends AppCompatActivity {
 
     //firebase auth object
     private FirebaseAuth mAuth;
+
+    private String mobile;
 
 
     @Override
@@ -50,7 +56,7 @@ public class verifycode extends AppCompatActivity {
         //getting mobile number from the previous activity
         //and sending the verification code to the number
         Intent intent = getIntent();
-        String mobile = intent.getStringExtra("mobile");
+       mobile = intent.getStringExtra("mobile");
         try {
             sendVerificationCode(mobile);
         } catch (InterruptedException e) {
@@ -62,15 +68,15 @@ public class verifycode extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String code = editTextCode.getText().toString().trim();
-                /*if (code.isEmpty() || code.length() < 6) {
+                if (code.isEmpty() || code.length() < 6) {
                     editTextCode.setError("Enter valid code");
                     editTextCode.requestFocus();
                     return;
-                }*/
-                Intent intent = new Intent(verifycode.this, slidemenu.class);
-                startActivity(intent);
-                //verifying the code entered manually
-                //verifyVerificationCode(code);
+                }
+//                Intent intent = new Intent(verifycode.this, slidemenu.class);
+//                startActivity(intent);
+//                //verifying the code entered manually
+                    verifyVerificationCode(code);
             }
         });
 
@@ -136,11 +142,19 @@ public class verifycode extends AppCompatActivity {
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-        /*mAuth.signInWithCredential(credential)
+        mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(verifycode.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            String user_id=mAuth.getCurrentUser().getUid();
+                            DatabaseReference current_user_db= FirebaseDatabase.getInstance().getReference().child("users").child("customer").child("profile").child(user_id);;
+                            Map newpost=new HashMap<>();
+                            newpost.put("phonenumber",mobile);
+                            newpost.put("user_id",user_id);
+                            current_user_db.setValue(newpost);
+
+
                             //verification successful we will start the profile activity
                             Intent intent = new Intent(verifycode.this, slidemenu.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -166,7 +180,7 @@ public class verifycode extends AppCompatActivity {
                         }
                     }
 
-                });*/
+                });
 
 
     }

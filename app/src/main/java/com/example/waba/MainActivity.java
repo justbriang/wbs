@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser()!=null){
-            Intent intent = new Intent(MainActivity.this, home.class);
+            Intent intent = new Intent(MainActivity.this, slidemenu.class);
 
             startActivity(intent);
         }
