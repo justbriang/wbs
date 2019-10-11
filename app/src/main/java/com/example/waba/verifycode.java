@@ -33,7 +33,6 @@ public class verifycode extends AppCompatActivity {
     //These are the objects needed
     //It is the verification id that will be sent to the user
     private String mVerificationId;
-
     //The edittext to input the code
     private EditText editTextCode;
 
@@ -41,6 +40,7 @@ public class verifycode extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private String mobile;
+
 
 
     @Override
@@ -148,9 +148,9 @@ public class verifycode extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             String user_id=mAuth.getCurrentUser().getUid();
-                            DatabaseReference current_user_db= FirebaseDatabase.getInstance().getReference().child("users").child("customer").child("profile").child(user_id);;
+                            DatabaseReference current_user_db= FirebaseDatabase.getInstance().getReference().child("users").child("customer").child("profile").child(user_id);
                             Map newpost=new HashMap<>();
-                            newpost.put("phonenumber",mobile);
+                            newpost.put("mobile",mobile);
                             newpost.put("user_id",user_id);
                             current_user_db.setValue(newpost);
 
@@ -169,7 +169,7 @@ public class verifycode extends AppCompatActivity {
                                 message = "Invalid code entered...";
                             }
 
-                            Snackbar snackbar = Snackbar.make(findViewById(R.id.parent), message, Snackbar.LENGTH_LONG);
+                            Snackbar snackbar = Snackbar.make(findViewById(R.id.buttonSignIn), message, Snackbar.LENGTH_LONG);
                             snackbar.setAction("Dismiss", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {

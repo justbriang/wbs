@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText editTextMobile;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         editTextMobile = findViewById(R.id.editTextMobile);
 
-        findViewById(R.id.buttonContinue).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Location extends Fragment {
     public Button logout;
-    public Button logout2;
+ 
 
     @Nullable
     @Override

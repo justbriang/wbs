@@ -11,15 +11,25 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class slidemenu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
     Button logout1;
+    private FirebaseAuth mAuth;
+    private DatabaseReference dbRef;
+    private TextView namet,phonet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -43,7 +53,38 @@ public class slidemenu extends AppCompatActivity implements NavigationView.OnNav
             navigationView.setCheckedItem(R.id.location);
 
         }
+        View view=navigationView.getHeaderView(0);
 
+        mAuth = FirebaseAuth.getInstance();
+        String user_id=mAuth.getCurrentUser().getUid();
+        namet=view.findViewById(R.id.sidename);
+        phonet=view.findViewById(R.id.sidephone);
+        dbRef = FirebaseDatabase.getInstance().getReference().child("users").child("customer").child("profile").child(user_id);
+
+
+
+        dbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    Profilead u = dataSnapshot.getValue(Profilead.class);
+
+                    String name = u.getName();
+                    String phone=u.getMobile();
+
+                   namet.setText(name);
+                   phonet.setText(phone);
+
+                }else{
+                    Toast.makeText(slidemenu.this, "No mobile phone is provided", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
