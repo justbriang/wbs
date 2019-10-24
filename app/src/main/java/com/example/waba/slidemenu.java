@@ -12,10 +12,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -26,9 +28,10 @@ import com.google.firebase.database.ValueEventListener;
 
 public class slidemenu extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
+    private ImageView image;
     Button logout1;
     private FirebaseAuth mAuth;
-    private DatabaseReference dbRef;
+    private DatabaseReference dbRef,dbRe;
     private TextView namet,phonet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public class slidemenu extends AppCompatActivity implements NavigationView.OnNav
         setSupportActionBar(toolbar);
         drawer=findViewById(R.id.drawer_layout);
         NavigationView navigationView=findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,drawer,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -59,9 +63,29 @@ public class slidemenu extends AppCompatActivity implements NavigationView.OnNav
         String user_id=mAuth.getCurrentUser().getUid();
         namet=view.findViewById(R.id.sidename);
         phonet=view.findViewById(R.id.sidephone);
-        dbRef = FirebaseDatabase.getInstance().getReference().child("users").child("customer").child("profile").child(user_id);
+        image=view.findViewById(R.id.imagep);
+
+        dbRef =  FirebaseDatabase.getInstance().getReference().child("users").child("customer").child(user_id).child("profile");
+        dbRe = FirebaseDatabase.getInstance().getReference().child("users").child("customer").child(user_id).child("profile").child("profile_pic");
+        dbRe.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if (dataSnapshot.exists()) {
+                    String url = dataSnapshot.child("imageURL").getValue().toString();
+                    Glide.with(slidemenu.this).load(url).fitCenter().into(image);
+
+                }
 
 
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -108,7 +132,7 @@ public class slidemenu extends AppCompatActivity implements NavigationView.OnNav
              Toast.makeText(this, "report_problem",Toast.LENGTH_SHORT).show();
              break;
          case R.id.about:
-             Toast.makeText(this,"about_us",Toast.LENGTH_SHORT);
+             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new about_us()).commit();
              break;
      }
         return true;

@@ -42,7 +42,7 @@ public class contact_driver extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         String user_id=mAuth.getCurrentUser().getUid();
 
-        dbRef = FirebaseDatabase.getInstance().getInstance().getReference().child("users").child("customer").child("profile").child(user_id);
+        dbRef = FirebaseDatabase.getInstance().getReference().child("users").child("customer").child(user_id).child("profile");
 
 
 

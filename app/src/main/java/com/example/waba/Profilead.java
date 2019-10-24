@@ -5,6 +5,7 @@ public class Profilead {
     private String Phonenumber;
     private String home;
     private String name;
+    private String imageurl;
 
     public Profilead() {
     }
@@ -47,5 +48,21 @@ public class Profilead {
         this.home = home;
         this.name = name;
 
+    }
+
+    public Profilead(String email, String phonenumber, String home, String name, String imageurl) {
+        this.email = email;
+        Phonenumber = phonenumber;
+        this.home = home;
+        this.name = name;
+        this.imageurl = imageurl;
+    }
+
+    public String getImageurl() {
+        return imageurl;
+    }
+
+    public void setImageurl(String imageurl) {
+        this.imageurl = imageurl;
     }
 }

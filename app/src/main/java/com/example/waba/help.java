@@ -42,7 +42,6 @@ public class help extends Fragment {
 
 
         update = view.findViewById(R.id.button1);
-        img1= view.findViewById(R.id.imageView);
 
 
 
@@ -52,7 +51,7 @@ public class help extends Fragment {
         Tmobile = view.findViewById(R.id.mobile);
         img4= view.findViewById(R.id.image4);
         Thome = view.findViewById(R.id.home);
-        img5=view.findViewById(R.id.imageView);
+
         Tname = view.findViewById(R.id.name);
         profilead=new Profilead();
         update.setOnClickListener(new View.OnClickListener() {

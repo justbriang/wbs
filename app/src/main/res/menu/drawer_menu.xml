@@ -11,6 +11,10 @@
             android:id="@+id/profile"
             android:icon="@drawable/ic_person"
             android:title="Profile" />
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/ic_info"
+            android:title="History" />
 
         <item
             android:id="@+id/call"
@@ -29,10 +33,7 @@
                 android:id="@+id/report"
                 android:icon="@drawable/ic_report_problem"
                 android:title="Report Problem" />
-            <item
-                android:id="@+id/about"
-                android:icon="@drawable/ic_info"
-                android:title="About us " />
+
 
 
         </menu>

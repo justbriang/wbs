@@ -148,7 +148,7 @@ public class verifycode extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             String user_id=mAuth.getCurrentUser().getUid();
-                            DatabaseReference current_user_db= FirebaseDatabase.getInstance().getReference().child("users").child("customer").child("profile").child(user_id);
+                            DatabaseReference current_user_db= FirebaseDatabase.getInstance().getReference().child("users").child("customer").child(user_id).child("profile");
                             Map newpost=new HashMap<>();
                             newpost.put("mobile",mobile);
                             newpost.put("user_id",user_id);

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#008577"
+
     android:orientation="vertical"
     android:scrollbarAlwaysDrawVerticalTrack="true"
     tools:context=".MainActivity">
@@ -12,9 +12,9 @@
         android:id="@+id/loginLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_centerInParent="true"
-        android:background="">
+
+        android:background="#fff">
 
         <TextView
             android:id="@+id/login_title"
@@ -23,96 +23,81 @@
             android:layout_marginBottom="16dp"
             android:gravity="center_horizontal"
             android:text="Login"
-            android:textColor="#fff"
+            android:textColor="@color/fui_bgFacebook"
             android:textSize="26sp"
             android:textStyle="bold" />
 
-        <RelativeLayout
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/login_title"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginRight="30dp"
-            android:background="#fff"
-            android:elevation="4dp"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:paddingTop="30dp">
 
-            <LinearLayout
+
+            <TextView
+                android:id="@+id/textView"
+
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="30dp">
+                android:layout_marginHorizontal="@dimen/browser_actions_context_menu_min_padding"
+                android:text="Enter phone number?"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+                android:textColor="@color/fui_bgFacebook" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:scrollbarAlwaysDrawVerticalTrack="true">
 
-                <TextView
-                    android:id="@+id/textView"
-
-                    android:layout_width="fill_parent"
+                <com.hbb20.CountryCodePicker
+                    android:id="@+id/ccp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:text="Enter phone number?"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
-                    android:textColor="@color/colorPrimary" />
+                    app:ccp_autoDetectCountry="true"
+                    app:ccp_showFlag="true"
+                    app:ccp_showNameCode="true" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"    android:scrollbarAlwaysDrawVerticalTrack="true"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-<!--                    <com.hbb20.CountryCodePicker-->
-<!--                        android:id="@+id/ccp"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        app:cpp_defaultNameCode="US" />-->
-
-                    <EditText
-                        android:id="@+id/editTextMobile"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/textView"
-                        android:layout_marginTop="20dp"
-
-
-                        android:drawablePadding="10dp"
-                        android:hint="mobile number"
-                        android:inputType="phone"
-                       android:singleLine="true" />
-                </LinearLayout>
-
-
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="fill_parent"
+                <EditText
+                    android:id="@+id/editTextMobile"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="22dp"
-                    android:background="#d67601"
-                    android:text="Log in"
-                    android:textAllCaps="false"
-                    android:textColor="#fff"
-                    android:textSize="18sp" />
+                    android:layout_below="@id/textView"
+                    android:layout_marginTop="20dp"
 
 
+                    android:drawablePadding="10dp"
+                    android:hint="mobile number"
+                    android:inputType="phone"
+                    android:singleLine="true" />
             </LinearLayout>
-        </RelativeLayout>
 
-        <ImageButton
-            android:id="@+id/user_profile_photo"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_below="@+id/login_title"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/ic_boy"
-            android:elevation="4dp" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="22dp"
+                android:layout_gravity="center"
+                android:background="@color/fui_bgFacebook"
+                android:text="Log in"
+                android:textAllCaps="false"
+                android:textColor="@color/common_google_signin_btn_text_dark_default"
+                android:textSize="18sp" />
+
+
+        </LinearLayout>
     </RelativeLayout>
+
 
     <ProgressBar
         android:id="@+id/progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="411dp"
         android:visibility="gone" />
 </RelativeLayout>
