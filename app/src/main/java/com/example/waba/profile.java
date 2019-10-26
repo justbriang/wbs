@@ -64,7 +64,7 @@ public class profile extends Fragment {
     private ImageView profileim, imageview2, imageview3, imageview4, imageview5, imageview;
     private TextView textView, textView2;
     private EditText Temail, Tmobile, Tname, Thome;
-    private DatabaseReference dbRef,dbRe;
+    private DatabaseReference dbRef, dbRe, db;
     private int nextClassifiedID;
     private String adId;
     private boolean isEdit;
@@ -75,6 +75,7 @@ public class profile extends Fragment {
     private static final int REQUEST_IMAGE_CAPTURE = 100;
     Profilead profilead;
     private StorageTask uploadtask;
+    String user_id;
 
 
     @Nullable
@@ -84,13 +85,13 @@ public class profile extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         profileim = view.findViewById(R.id.profileig);
 
-        String user_id = mAuth.getCurrentUser().getUid();
+        user_id = mAuth.getCurrentUser().getUid();
         storage = FirebaseStorage.getInstance().getReference("users").child("customer").child(user_id).child("profile");
 
         dbRef = FirebaseDatabase.getInstance().getReference().child("users").child("customer").child(user_id).child("profile");
 
 
-        DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("users").child("customer").child(user_id).child("profile").child("rating");
+        db = FirebaseDatabase.getInstance().getReference().child("users").child("customer").child(user_id).child("profile").child("rating");
         dbRe = FirebaseDatabase.getInstance().getReference().child("users").child("customer").child(user_id).child("profile").child("profile_pic");
         dbRe.addValueEventListener(new ValueEventListener() {
             @Override
@@ -98,10 +99,9 @@ public class profile extends Fragment {
 
                 if (dataSnapshot.exists()) {
                     String url = dataSnapshot.child("imageURL").getValue().toString();
-                        Glide.with(getContext()).load(url).fitCenter().into(profileim);
+                    Glide.with(getContext()).load(url).fitCenter().into(profileim);
 
-                    }
-
+                }
 
 
             }
@@ -156,16 +156,41 @@ public class profile extends Fragment {
         ratingBar = (RatingBar) view.findViewById(R.id.ratingbar);
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                rate.setText("value is " + rating);
-                dbRef.child("rating").setValue(String.valueOf(rating));
+            public void onRatingChanged(RatingBar ratingBar, final float rating, boolean fromUser) {
 
+                db.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        if(dataSnapshot.exists()){
+                          float rater=Float.parseFloat(dataSnapshot.getValue().toString());
+
+                            float total =(rating+rater)/2;
+                            rate.setText("value is " + total);
+                            dbRef.child("rating").setValue(String.valueOf(total));
+                        }
+
+                        else{
+                            rate.setText("value is " + rating);
+                            dbRef.child("rating").setValue(String.valueOf(rating));
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                // double  total = 0;
+                // double current = Double.parseDouble(FirebaseDatabase.getInstance().getReference().child("users").child("customer").child(user_id).child("profile").child("rating").getvalue());
             }
         });
         update = view.findViewById(R.id.button1);
 
         textView2 = view.findViewById(R.id.text2);
-     
+
         imageview2 = view.findViewById(R.id.image2);
         Temail = view.findViewById(R.id.email);
         imageview3 = view.findViewById(R.id.image3);

@@ -3,8 +3,10 @@ package com.example.waba;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -53,6 +55,8 @@ public class verifycode extends AppCompatActivity {
         editTextCode = findViewById(R.id.editTextCode);
 
 
+
+
         //getting mobile number from the previous activity
         //and sending the verification code to the number
         Intent intent = getIntent();
@@ -62,6 +66,7 @@ public class verifycode extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
         //if the automatic sms detection did not work, user can also enter the code manually
         //so adding a click listener to the button
         findViewById(R.id.buttonSignIn).setOnClickListener(new View.OnClickListener() {
@@ -134,11 +139,20 @@ public class verifycode extends AppCompatActivity {
 
 
     private void verifyVerificationCode(String code) {
-        //creating the credential
-        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
-
-        //signing the user
-        signInWithPhoneAuthCredential(credential);
+        try {
+            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
+            signInWithPhoneAuthCredential(credential);
+        } catch (Exception e) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Verification Code is wrong, try again", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        }
+//        //creating the credential
+//        PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, code);
+//
+//        //signing the user
+//        signInWithPhoneAuthCredential(credential);
+//    }
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
