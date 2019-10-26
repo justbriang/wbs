@@ -21,14 +21,17 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Location extends Fragment {
-    public Button logout1,logout;
+    public Button logout1, logout;
 
     public EditText tdriver, tlocation, tcash, tdate;
     private DatabaseReference dbRef;
     private ImageView imageview, imageview2, imageview3, imageview4, imageview5;
     private FirebaseAuth mAuth;
-   private historyad histor;
+    private historyad histor;
 
 
     @Nullable
@@ -38,43 +41,12 @@ public class Location extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_location, container, false);
         mAuth = FirebaseAuth.getInstance();
-        String user_id = mAuth.getCurrentUser().getUid();
-
-        dbRef = FirebaseDatabase.getInstance().getReference().child("users").child("customer").child(user_id).child("history");
+        final String user_id = mAuth.getCurrentUser().getUid();
 
 
-        dbRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    historyad u = dataSnapshot.getValue(historyad.class);
-                    String location = u.getLocation();
-                    String cash = u.getCash();
-                    String date = u.getDate();
-                    String driver = u.getDriver();
-
-                    tdriver.setText(driver);
-                    tlocation.setText(location);
-                    tcash.setText(cash);
-                    tdate.setText(date);
-                } else {
-                   // Toast.makeText(getActivity(), "no data exists", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-        logout = view.findViewById(R.id.logout);
+    logout = view.findViewById(R.id.logout);
 
         logout1 = view.findViewById(R.id.up);
-
-
-
         tdriver = view.findViewById(R.id.drivert);
 
         imageview2 = view.findViewById(R.id.image2);
@@ -85,24 +57,19 @@ public class Location extends Fragment {
         tlocation = view.findViewById(R.id.locationt);
         imageview5 = view.findViewById(R.id.image5);
         histor = new historyad();
-        logout1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String driver = tdriver.getText().toString().trim();
-                String name = tcash.getText().toString().trim();
-                String Phonenumber = tdate.getText().toString().trim();
-                String home = tlocation.getText().toString().trim();
 
+//
+        tdriver = view.findViewById(R.id.drivert);
 
-                histor.setDriver(tdriver.getText().toString().trim());
-                histor.setCash(tcash.getText().toString().trim());
-                histor.setDate(tdate.getText().toString().trim());
-                histor.setLocation(tlocation.getText().toString().trim());
-                Toast.makeText(getActivity(), "your data has been entered", Toast.LENGTH_LONG).show();
-                dbRef.setValue(histor);
+        imageview2 = view.findViewById(R.id.image2);
+        tcash = view.findViewById(R.id.casht);
+        imageview3 = view.findViewById(R.id.image3);
+        tdate = view.findViewById(R.id.datet);
+        imageview4 = view.findViewById(R.id.image4);
+        tlocation = view.findViewById(R.id.locationt);
+        imageview5 = view.findViewById(R.id.image5);
+        histor = new historyad();
 
-            }
-        });
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,10 +81,19 @@ public class Location extends Fragment {
 
             }
         });
-
-
-
-
+//
+        logout1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Map<String, Object> map = new HashMap<>();
+                dbRef = FirebaseDatabase.getInstance().getReference().child("users").child("customer").child(user_id).child("history").push();
+                map.put("location", tdriver.getText().toString());
+                map.put("driver", tdriver.getText().toString());
+                map.put("date", tdate.getText().toString());
+                map.put("cash", tcash.getText().toString());
+                dbRef.setValue(map);
+            }
+        });
 
 
         return view;
