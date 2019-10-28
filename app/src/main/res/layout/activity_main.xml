@@ -18,6 +18,7 @@
 
         <TextView
             android:id="@+id/login_title"
+            style="@style/FirebaseUI.Text.BodyText"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
@@ -37,7 +38,7 @@
 
             <TextView
                 android:id="@+id/textView"
-
+                style="@style/FirebaseUI"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/browser_actions_context_menu_min_padding"
@@ -54,6 +55,7 @@
 
                 <com.hbb20.CountryCodePicker
                     android:id="@+id/ccp"
+                    style="@style/FirebaseUI.CountrySpinner"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:ccp_autoDetectCountry="true"
@@ -66,6 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/textView"
                     android:layout_marginTop="20dp"
+                    style="@style/FirebaseUI.TextInputEditText.PhoneField"
 
 
                     android:drawablePadding="10dp"
@@ -79,14 +82,14 @@
                 android:id="@+id/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="22dp"
                 android:layout_gravity="center"
+                android:layout_margin="22dp"
                 android:background="@color/fui_bgFacebook"
                 android:text="Log in"
                 android:textAllCaps="false"
+                style="@style/TextAppearance.AppCompat.Widget.Button"
                 android:textColor="@color/common_google_signin_btn_text_dark_default"
                 android:textSize="18sp" />
-
 
 
         </LinearLayout>
@@ -94,6 +97,7 @@
 
 
     <ProgressBar
+
         android:id="@+id/progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
